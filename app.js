@@ -19,20 +19,9 @@ app.use(bodyParser.json())
 const port = process.env.PORT || 3010;
 
 // app.use(cors())
-// List of allowed origins
-const allowedOrigins = ['https://spa-tacc.onrender.com/' , 'https://server-starter-xpv4.onrender.com' ];
-
 // CORS options
 const corsOptions = {
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
+  origin: true, // Allow all origins
   credentials: true, // Access-Control-Allow-Credentials: true
 };
 
@@ -41,7 +30,6 @@ app.use(cors(corsOptions));
 
 // Pre-flight options request for all routes
 app.options('*', cors(corsOptions));
-
 
 
 
